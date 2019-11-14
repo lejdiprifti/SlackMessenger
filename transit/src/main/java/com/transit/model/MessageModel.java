@@ -5,20 +5,31 @@ public class MessageModel {
 		
 	}
 	
-	private String text;
+	private String username;
+	private String app;
+	
 
-	public String getText() {
-		return text;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getApp() {
+		return app;
+	}
+
+	public void setApp(String app) {
+		this.app = app;
 	}
 
 	@Override
 	public String toString() {
-		return "MessageModel [text=" + text + "]";
+		return "MessageModel [username=" + username + ", app=" + app + "]";
 	}
+
 	
 	
 }

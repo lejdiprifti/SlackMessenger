@@ -1,6 +1,7 @@
 package com.transit.services;
 
 import java.io.IOException;
+import java.util.GregorianCalendar;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -32,12 +33,14 @@ public class TestService {
 
 	public String sendMessageOnSlack(MessageModel message) throws ClientProtocolException, IOException {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpPost post = new HttpPost("https://hooks.slack.com/services/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");
-		post.setHeader("Content-type", "application/json");
+		HttpPost post = new HttpPost("https://hooks.slack.com/services/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");
 		JSONObject json = new JSONObject();
-		json.put("text", message.getText());
+		String text = " "+ message.getUsername()+" opened the application "+message.getApp()+" at "+ new GregorianCalendar().getTime() + " ";
+		json.put("text", text);
 		try {
-			StringEntity stringEntity = new StringEntity(json.toString());
+			StringEntity stringEntity = new StringEntity(json.toJSONString());
+			post.addHeader("Content-Type", "application/json");
+			stringEntity.setContentType("application/json");
 			post.setEntity(stringEntity);
 
 			return httpclient.execute(post).toString();
