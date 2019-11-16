@@ -1,12 +1,15 @@
 package com.transit.model;
 
-public class MessageModel {
+import java.util.Date;
+
+public class DataModel {
 	
 	private Long id;
 	private String emerKlienti;
 	private Long idShitjeKoka;
+	private Date dateKrijimi;
 	
-	public MessageModel() {
+	public DataModel() {
 		
 	}
 	
@@ -31,6 +34,15 @@ public class MessageModel {
 
 	public void setIdShitjeKoka(Long idShitjeKoka) {
 		this.idShitjeKoka = idShitjeKoka;
+	}
+	
+
+	public Date getDateKrijimi() {
+		return dateKrijimi;
+	}
+
+	public void setDateKrijimi(Date dateKrijimi) {
+		this.dateKrijimi = dateKrijimi;
 	}
 
 	@Override

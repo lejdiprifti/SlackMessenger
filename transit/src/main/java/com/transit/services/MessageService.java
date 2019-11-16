@@ -6,7 +6,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.transit.entity.MessageEntity;
+import com.transit.entity.DataEntity;
 import com.transit.model.MyJsonObject;
 import com.transit.repository.MessageRepository;
 
@@ -23,7 +23,7 @@ public class MessageService {
 	}
 	
 	public void add(MyJsonObject model) {
-		MessageEntity entity = new MessageEntity();
+		DataEntity entity = new DataEntity();
 		entity.setEmerKlienti(model.getEmerKlienti());
 		try {
 			test.sendMessageOnSlack(model);

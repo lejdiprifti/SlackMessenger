@@ -4,8 +4,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.transit.entity.MessageEntity;
-import com.transit.model.MessageModel;
+import com.transit.entity.DataEntity;
+import com.transit.model.DataModel;
 
 @Component
 public class MessageConverter {
@@ -17,12 +17,12 @@ public class MessageConverter {
 		
 	}
 	
-	public MessageModel toModel(MessageEntity entity) {
-		return modelMapper.map(entity, MessageModel.class);
+	public DataModel toModel(DataEntity entity) {
+		return modelMapper.map(entity, DataModel.class);
 	}
 	
-	public MessageEntity toEntity(MessageModel model) {
-		return modelMapper.map(model, MessageEntity.class);
+	public DataEntity toEntity(DataModel model) {
+		return modelMapper.map(model, DataEntity.class);
 	}
 	
 }
