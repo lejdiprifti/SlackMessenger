@@ -1,6 +1,7 @@
 package com.transit.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class UserResource {
 	}
 	
 	@PostMapping
+	@CrossOrigin("*")
 	public void register(@RequestBody UserModel model) {
 		userService.register(model);
 	}

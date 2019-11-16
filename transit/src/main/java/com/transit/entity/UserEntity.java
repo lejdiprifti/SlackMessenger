@@ -31,6 +31,7 @@ public class UserEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	
+	
 	public UserEntity() {
 		
 	}

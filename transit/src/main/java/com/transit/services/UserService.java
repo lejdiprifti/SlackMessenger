@@ -1,5 +1,7 @@
 package com.transit.services;
 
+import java.util.GregorianCalendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class UserService {
 		entity.setFirstName(model.getFirstName());
 		entity.setLastName(model.getLastName());
 		entity.setPassword(model.getPassword());
-		entity.setDate(model.getDate());
+		entity.setDate(new GregorianCalendar().getTime());
 		userRepository.save(entity);
 	}
 }
