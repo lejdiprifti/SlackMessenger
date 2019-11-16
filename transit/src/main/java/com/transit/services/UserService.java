@@ -22,6 +22,7 @@ public class UserService {
 		entity.setFirstName(model.getFirstName());
 		entity.setLastName(model.getLastName());
 		entity.setPassword(model.getPassword());
+		entity.setDate(model.getDate());
 		userRepository.save(entity);
 	}
 }
