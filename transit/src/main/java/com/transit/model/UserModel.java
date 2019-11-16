@@ -1,13 +1,15 @@
 package com.transit.model;
 
+import java.util.Date;
+
 public class UserModel {
 
 	private Long id;
 	private String username;
-	private String fistName;
+	private String firstName;
 	private String lastName;
 	private String password;
-	
+	private Date date;
 	public UserModel() {
 		
 	}
@@ -28,12 +30,12 @@ public class UserModel {
 		this.username = username;
 	}
 
-	public String getFistName() {
-		return fistName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFistName(String fistName) {
-		this.fistName = fistName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
@@ -52,11 +54,18 @@ public class UserModel {
 		this.password = password;
 	}
 
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	@Override
 	public String toString() {
-		return "UserModel [id=" + id + ", username=" + username + ", fistName=" + fistName + ", lastName=" + lastName
-				+ ", password=" + password + "]";
+		return "UserModel [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", password=" + password + ", date=" + date + "]";
 	}
-	
 	
 }

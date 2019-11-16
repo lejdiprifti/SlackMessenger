@@ -19,7 +19,7 @@ public class UserService {
 	public void register(UserModel model) {
 		UserEntity entity = new UserEntity();
 		entity.setUsername(model.getUsername());
-		entity.setFirstName(model.getFistName());
+		entity.setFirstName(model.getFirstName());
 		entity.setLastName(model.getLastName());
 		entity.setPassword(model.getPassword());
 		userRepository.save(entity);
