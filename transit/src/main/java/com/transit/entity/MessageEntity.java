@@ -1,18 +1,34 @@
-package com.transit.model;
+package com.transit.entity;
 
-public class MessageModel {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="messages", schema="goalpha")
+public class MessageEntity {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name="id")
 	private Long id;
+	
+	@Column(name="emer_klienti")
 	private String emerKlienti;
+	@Column(name="id_shitje_koka")
 	private Long idShitjeKoka;
 	
-	public MessageModel() {
+	public MessageEntity() {
 		
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -31,11 +47,6 @@ public class MessageModel {
 
 	public void setIdShitjeKoka(Long idShitjeKoka) {
 		this.idShitjeKoka = idShitjeKoka;
-	}
-
-	@Override
-	public String toString() {
-		return "MessageModel [id=" + id + ", emerKlienti=" + emerKlienti + ", idShitjeKoka=" + idShitjeKoka + "]";
 	}
 	
 }
