@@ -10,7 +10,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Service;
 
-import com.transit.model.MessageModel;
+import com.transit.model.MyJsonObject;
 
 import net.minidev.json.JSONObject;
 
@@ -29,7 +29,7 @@ public class TestService {
 	 * httpclient.execute(httpget); return response.getEntity(); }
 	 */
 	
-	 public String sendMessageOnSlack(MessageModel message) throws
+	 public String sendMessageOnSlack(MyJsonObject message) throws
 	  ClientProtocolException, IOException { 
 		 CloseableHttpClient httpclient = HttpClients.createDefault(); HttpPost post = new HttpPost(
 	  "https://hooks.slack.com/services/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"); 

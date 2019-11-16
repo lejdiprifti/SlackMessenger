@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.transit.model.MessageModel;
+import com.transit.demo.ParseJson;
+import com.transit.model.MyJsonObject;
 import com.transit.services.MessageService;
 import com.transit.services.TestService;
 
@@ -18,6 +19,9 @@ public class MessageResource {
 	
 	@Autowired
 	private TestService testService;
+	
+	@Autowired
+	private ParseJson parseJson;
 	
 	@Autowired
 	private MessageService messageService;
@@ -43,8 +47,8 @@ public class MessageResource {
 	@PostMapping
 	@CrossOrigin("*")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void add(@RequestBody MessageModel model) {
-		System.out.println(model);
-			messageService.add(model);
+	public void add(@RequestBody String object) {
+		MyJsonObject myJson = parseJson.parse(object);
+			messageService.add(myJson);
 	}
 }
