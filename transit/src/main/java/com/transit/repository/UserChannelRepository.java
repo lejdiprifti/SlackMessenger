@@ -13,4 +13,5 @@ import com.transit.entity.UserEntity;
 public interface UserChannelRepository extends CrudRepository<UserChannelEntity, Long> {
 	public UserChannelEntity findByUserAndChannelId(@Param("user") UserEntity user, @Param("channelId") String channelId);
 	public List<UserChannelEntity> findAllByUser(@Param("user") UserEntity user); 
+	public List<UserChannelEntity> findAllByFlag(@Param("flag") boolean flag);
 }

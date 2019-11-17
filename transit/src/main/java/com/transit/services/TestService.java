@@ -29,18 +29,21 @@ public class TestService {
 	 * httpclient.execute(httpget); return response.getEntity(); }
 	 */
 	
-	 public String sendMessageOnSlack(MyJsonObject message) throws
+	 public String sendMessageOnSlack(MyJsonObject message, String channel, String access_token) throws
 	  ClientProtocolException, IOException { 
-		 CloseableHttpClient httpclient = HttpClients.createDefault(); HttpPost post = new HttpPost(
-	  "https://hooks.slack.com/services/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"); 
-      JSONObject json = new JSONObject(); String text = " "+
-	  message.getEmerKlienti()+" opened the application "+message.getEmerKlienti()+" at "+ new
-	  GregorianCalendar().getTime() + " "; json.put("text", text); try {
+		 CloseableHttpClient httpclient = HttpClients.createDefault(); 
+		 HttpPost post = new HttpPost(
+	  "https://slack.com/api/chat.postMessage"); 
+      JSONObject json = new JSONObject(); 
+      String text = message.getEmerKlienti()+" " +message.getAdresaDergimit()+" "+ new GregorianCalendar().getTime(); 
+      json.put("text", text); 
+      json.put("channel", channel);
+      try {
 	  StringEntity stringEntity = new StringEntity(json.toJSONString());
 	  post.addHeader("Content-Type", "application/json");
+	  post.addHeader("Authorization", "Bearer " + access_token);
 	  stringEntity.setContentType("application/json");
 	  post.setEntity(stringEntity);
-	  
 	  return httpclient.execute(post).toString();
 	  
 	  } catch (Exception e) { throw new RuntimeException(e); } }

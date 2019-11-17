@@ -38,4 +38,15 @@ public class UserService {
 		}
 	}
 
+	public void update(Long id, UserModel model) {
+		try {
+			UserEntity user = userRepository.findById(id).get();
+			if (model.getSlackToken() != null) {
+				user.setSlackToken(model.getSlackToken());
+			}
+			userRepository.save(user);
+		} catch (NoResultException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+		}
+	}
 }
