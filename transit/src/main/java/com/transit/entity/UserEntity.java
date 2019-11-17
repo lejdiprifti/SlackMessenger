@@ -31,6 +31,9 @@ public class UserEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	
+	@Column(name="slack_token")
+	private String slackToken;
+	
 	
 	public UserEntity() {
 		
@@ -84,9 +87,19 @@ public class UserEntity {
 		this.date = date;
 	}
 
+	public String getSlackToken() {
+		return slackToken;
+	}
+
+	public void setSlackToken(String slackToken) {
+		this.slackToken = slackToken;
+	}
+
 	@Override
 	public String toString() {
 		return "UserEntity [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", password=" + password + ", date=" + date + "]";
+				+ ", password=" + password + ", date=" + date + ", slackToken=" + slackToken + "]";
 	}
+
+	
 }

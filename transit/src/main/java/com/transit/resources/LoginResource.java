@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.transit.entity.LoginRequest;
-import com.transit.model.UserModel;
+import com.transit.model.LoginResponse;
 import com.transit.services.LoginService;
 
 @RestController
@@ -25,7 +25,7 @@ public class LoginResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserModel> login(@RequestBody LoginRequest request) {
-		return new ResponseEntity<UserModel>(loginService.login(request), HttpStatus.OK);
+	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+		return new ResponseEntity<LoginResponse>(loginService.login(request), HttpStatus.OK);
 	}
 }

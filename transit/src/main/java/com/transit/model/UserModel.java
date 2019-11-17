@@ -10,6 +10,7 @@ public class UserModel {
 	private String lastName;
 	private String password;
 	private Date date;
+	private String slackToken;
 	public UserModel() {
 		
 	}
@@ -60,6 +61,14 @@ public class UserModel {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public String getSlackToken() {
+		return slackToken;
+	}
+
+	public void setSlackToken(String slackToken) {
+		this.slackToken = slackToken;
 	}
 
 	@Override

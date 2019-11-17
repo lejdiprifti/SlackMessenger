@@ -8,5 +8,6 @@ import com.transit.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Long>{
+	public UserEntity findByUsername(@Param("username") String username);
 	public UserEntity findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 }

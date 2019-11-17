@@ -35,17 +35,17 @@ public class UserChannelService {
 		
 	}
 	
-	public void saveChannels(UserChannelModel model) {
+	public void saveChannels(UserChannelModel model,String username) {
 		UserChannelEntity entity = new UserChannelEntity();
 		entity.setChannelId(model.getChannelId());
-		entity.setUser(userConverter.toEntity(model.getUser()));
+		entity.setUser(userRepository.findByUsername(username));
 		entity.setFlag(true);
 		userChannelRepository.save(entity);
 	}
 	
-	public List<UserChannelModel> getUserChannels(Long id) {
+	public List<UserChannelModel> getUserChannels(String username) {
 		try {
-			UserEntity user = userRepository.findById(id).get();
+			UserEntity user = userRepository.findByUsername(username);
 			return userChannelConverter.toModel(userChannelRepository.findAllByUser(user));
 		} catch (NoResultException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
