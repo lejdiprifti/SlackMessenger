@@ -1,15 +1,16 @@
-import fetch from 'node-fetch'
+import '../configure/configure-channels.js'
 const template = document.createElement('template')
 template.innerHTML = `
-<main>
+<link rel="stylesheet" href="../../css/login/login.css" />
+<div>
 <input id="username" placeholder="Username" type="text" required />
-<input id="password" placeholder="Password" type="text" required />
+<input id="password" placeholder="Password" type="password" required />
 <p class="hidden">Username or password is not correct.</p>
-<button id="submit">Login</button>
-</main>
+<input type="submit" id="submit" value="Login" />
+</div>
 `
-
-class LoginBoard extends window.HTMLElement {
+let token = 'SomeToken'
+export class LoginBoard extends window.HTMLElement {
   constructor () {
     super()
 
@@ -18,14 +19,15 @@ class LoginBoard extends window.HTMLElement {
   }
 
   connectedCallback () {
-    this.token = 'SomeToken'
+    this.loginUser()
   }
 
   loginUser () {
-    const submit = document.querySelector('submit')
+    const submit = this.shadowRoot.querySelector('#submit')
+    console.log(submit)
     submit.addEventListener('click', async _event => {
-      const username = document.body.querySelector('username').value
-      const password = document.body.querySelector('password').value
+      const username = this.shadowRoot.querySelector('#username').value
+      const password = this.shadowRoot.querySelector('#password').value
       const response = await fetch('http://localhost:8080/login', {
         method: 'POST',
         headers: {
@@ -37,19 +39,22 @@ class LoginBoard extends window.HTMLElement {
         })
       }).catch(_error => {
         document.body.querySelectorAll('.hidden')[0].classList.remove('hidden')
+        console.log('error')
       })
       const answer = await response.json()
-      answer.setToken(answer.token)
+      setToken(answer.jwt)
+      this.shadowRoot.innerHTML = ''
+      this.shadowRoot.appendChild(document.createElement('configure-channels'))
     })
   }
+}
 
-  setToken (token) {
-    this.token = token
-  }
+export function setToken (_token) {
+  token = _token
+}
 
-  getToken () {
-    return this.token
-  }
+export function getToken () {
+  return token
 }
 
 window.customElements.define('login-board', LoginBoard)
