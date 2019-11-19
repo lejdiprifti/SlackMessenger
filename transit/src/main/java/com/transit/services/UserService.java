@@ -24,19 +24,18 @@ public class UserService {
 	}
 
 	public void register(UserModel model) {
-		try {
-			userRepository.findByUsername(model.getUsername());
+			 if (userRepository.findByUsername(model.getUsername()) == null) {
+				 UserEntity entity = new UserEntity();
+					entity.setUsername(model.getUsername());
+					entity.setFirstName(model.getFirstName());
+					entity.setLastName(model.getLastName());
+					entity.setPassword(model.getPassword());
+					entity.setDate(new GregorianCalendar().getTime());
+					userRepository.save(entity);
+			 } else {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
-		} catch (NoResultException e) {
-			UserEntity entity = new UserEntity();
-			entity.setUsername(model.getUsername());
-			entity.setFirstName(model.getFirstName());
-			entity.setLastName(model.getLastName());
-			entity.setPassword(model.getPassword());
-			entity.setDate(new GregorianCalendar().getTime());
-			userRepository.save(entity);
+			 }			
 		}
-	}
 
 	public void update(Long id, UserModel model) {
 		try {

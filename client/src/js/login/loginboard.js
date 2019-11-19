@@ -19,6 +19,7 @@ export class LoginBoard extends window.HTMLElement {
   }
 
   connectedCallback () {
+    window.location.hash = 'login'
     this.loginUser()
   }
 
@@ -26,6 +27,7 @@ export class LoginBoard extends window.HTMLElement {
     const submit = this.shadowRoot.querySelector('#submit')
     console.log(submit)
     submit.addEventListener('click', async _event => {
+      window.location.href = 'http://localhost:4000/#login'
       const username = this.shadowRoot.querySelector('#username').value
       const password = this.shadowRoot.querySelector('#password').value
       const response = await fetch('http://localhost:8080/login', {
