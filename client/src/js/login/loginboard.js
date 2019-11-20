@@ -7,6 +7,7 @@ template.innerHTML = `
 <input id="password" placeholder="Password" type="password" required />
 <p class="hidden">Username or password is not correct.</p>
 <input type="submit" id="submit" value="Login" />
+<input type="submit" id="register" value="Sign up" />
 </div>
 `
 let token = 'SomeToken'
@@ -19,7 +20,9 @@ export class LoginBoard extends window.HTMLElement {
   }
 
   connectedCallback () {
+    window.location.hash = 'login'
     this.loginUser()
+    this.onRegister()
   }
 
   loginUser () {
@@ -46,6 +49,13 @@ export class LoginBoard extends window.HTMLElement {
       setToken(answer.jwt)
       this.shadowRoot.innerHTML = ''
       this.shadowRoot.appendChild(document.createElement('configure-channels'))
+    })
+  }
+
+  onRegister () {
+    const register = this.shadowRoot.querySelector('#register')
+    register.addEventListener('click', event => {
+      window.location.href = 'https://slack.com/oauth/authorize?client_id=832604726948.833104713589&scope=bot'
     })
   }
 }

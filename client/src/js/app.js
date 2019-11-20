@@ -1,30 +1,29 @@
-import { getTokenRegister } from './register/register.js'
 import './login/loginboard.js'
-
+import './register/register.js'
+let accessToken
 function open () {
   window.addEventListener('hashchange', event => {
     const hash = window.location.hash
+    console.log(hash)
     switch (hash) {
       case '#register':
         document.body.innerHTML = ''
-        document.body.appendChild(document.createElement('register-board'))
+        window.location.href = 'https://slack.com/oauth/authorize?client_id=832604726948.833104713589&scope=bot'
         break
       case '#login':
         document.body.innerHTML = ''
         document.body.appendChild(document.createElement('login-board'))
         break
-      default:
-        document.body.innerHTML = ''
-        document.body.appendChild(document.createElement('login-board'))
-        break
     }
   })
+  checkCode()
 }
 
 export async function checkCode () {
   if (window.location.href.indexOf('?code=') !== -1) {
+    console.log(window.location.href)
     const code = window.location.href.substr(28, 90)
-    document.body.appendChild(document.createElement('login-board'))
+    document.body.appendChild(document.createElement('register-board'))
     const urlParameters = 'client_secret=3f61867e5dda13d50115096bc9b906b4&client_id=832604726948.833104713589&code=' + code
     let response = await fetch('https://slack.com/api/oauth.access', {
       method: 'POST',
@@ -34,23 +33,18 @@ export async function checkCode () {
       body: urlParameters
     })
     response = await response.json()
-    console.log(response)
-    saveAccessToken(response)
+    setAccessToken(response.bot.bot_access_token)
+    console.log(getAccessToken())
+    window.location.href = 'http://localhost:4000/#register'
   }
+  document.body.appendChild(document.createElement('register-board'))
 }
 
-async function saveAccessToken (response) {
-  console.log(getTokenRegister())
-  await fetch('http://localhost:8080/users', {
-    method: 'PUT',
-    headers: {
-      'Content-type': 'application/json',
-      Authorization: 'Bearer ' + getTokenRegister()
-    },
-    body: JSON.stringify({
-      slackToken: response.bot_access_token
-    })
-  })
+function setAccessToken (_token) {
+  accessToken = _token
+}
+
+export function getAccessToken () {
+  return accessToken
 }
 open()
-checkCode()

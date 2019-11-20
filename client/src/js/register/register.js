@@ -1,3 +1,5 @@
+import { getAccessToken } from '../app.js'
+
 const template = document.createElement('template')
 template.innerHTML = `
 <label for="username">Username</label>
@@ -20,7 +22,6 @@ export class Register extends window.HTMLElement {
   }
 
   connectedCallback () {
-    window.location.hash = 'register'
     this.register()
   }
 
@@ -31,7 +32,7 @@ export class Register extends window.HTMLElement {
     const lastname = this.shadowRoot.querySelector('#lastname')
     const password = this.shadowRoot.querySelector('#password')
     submit.addEventListener('click', async event => {
-      const response = await fetch('http://localhost:8080/register', {
+      await fetch('http://localhost:8080/register', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json'
@@ -40,34 +41,11 @@ export class Register extends window.HTMLElement {
           username: username.value,
           firstName: firstname.value,
           lastName: lastname.value,
+          slackToken: getAccessToken(),
           password: password.value
         })
       })
-      if (response.status === 201) {
-        this.produceToken()
-      }
     })
-  }
-
-  async produceToken () {
-    const username = this.shadowRoot.querySelector('#username')
-    const password = this.shadowRoot.querySelector('#password')
-    let response = await fetch('http://localhost:8080/login', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: username.value,
-        password: password.value
-      })
-    })
-    if (response.status === 200) {
-      response = await response.json()
-      console.log(username, password, response.jwt)
-      setTokenRegister(response.jwt)
-      window.location.href = 'https://slack.com/oauth/authorize?client_id=832604726948.833104713589&scope=bot'
-    }
   }
 }
 

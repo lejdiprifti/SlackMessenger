@@ -30,6 +30,7 @@ public class UserService {
 			entity.setFirstName(model.getFirstName());
 			entity.setLastName(model.getLastName());
 			entity.setPassword(model.getPassword());
+			entity.setSlackToken(model.getSlackToken());
 			entity.setDate(new GregorianCalendar().getTime());
 			userRepository.save(entity);
 		} else {
