@@ -19,7 +19,6 @@ export class LoginBoard extends window.HTMLElement {
   }
 
   connectedCallback () {
-    window.location.hash = 'login'
     this.loginUser()
   }
 
