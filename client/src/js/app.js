@@ -35,9 +35,7 @@ export async function checkCode () {
     response = await response.json()
     setAccessToken(response.bot.bot_access_token)
     console.log(getAccessToken())
-    window.location.href = 'http://localhost:4000/#register'
   }
-  document.body.appendChild(document.createElement('register-board'))
 }
 
 function setAccessToken (_token) {

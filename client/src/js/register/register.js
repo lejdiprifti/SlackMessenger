@@ -32,6 +32,8 @@ export class Register extends window.HTMLElement {
     const lastname = this.shadowRoot.querySelector('#lastname')
     const password = this.shadowRoot.querySelector('#password')
     submit.addEventListener('click', async event => {
+      const accessToken = getAccessToken()
+      console.log(accessToken)
       await fetch('http://localhost:8080/register', {
         method: 'POST',
         headers: {
@@ -41,7 +43,7 @@ export class Register extends window.HTMLElement {
           username: username.value,
           firstName: firstname.value,
           lastName: lastname.value,
-          slackToken: getAccessToken(),
+          slackToken: '' + getAccessToken(),
           password: password.value
         })
       })
