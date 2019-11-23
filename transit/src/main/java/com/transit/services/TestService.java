@@ -20,14 +20,6 @@ public class TestService {
 	public TestService() {
 
 	}
-	/*
-	 * public HttpEntity sendOrder(String customer, Long id) throws
-	 * ClientProtocolException, IOException { CloseableHttpClient httpclient =
-	 * HttpClients.createDefault(); HttpGet httpget = new
-	 * HttpGet("https://enpvwnv93hyp.x.pipedream.net/?customer=" + customer +
-	 * "&order=" + id); CloseableHttpResponse response =
-	 * httpclient.execute(httpget); return response.getEntity(); }
-	 */
 	
 	 public String sendMessageOnSlack(MyJsonObject message, String channel, String access_token) throws
 	  ClientProtocolException, IOException { 

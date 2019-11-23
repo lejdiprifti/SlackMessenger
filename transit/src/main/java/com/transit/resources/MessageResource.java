@@ -12,15 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.transit.demo.ParseJson;
 import com.transit.model.MyJsonObject;
 import com.transit.services.MessageService;
-import com.transit.services.TestService;
 
 @RestController
 @RequestMapping(path = "/messenger", consumes = "application/json", produces = "application/json")
 @CrossOrigin("*")
 public class MessageResource {
-
-	@Autowired
-	private TestService testService;
 
 	@Autowired
 	private ParseJson parseJson;
@@ -31,19 +27,6 @@ public class MessageResource {
 	public MessageResource() {
 
 	}
-
-	/*
-	 * @PostMapping public void getRequests(@RequestBody OrderModel model) { try {
-	 * testService.sendOrder(model.getCustomer(), model.getId()); } catch
-	 * (IOException e) { e.printStackTrace(); } }
-	 */
-
-	/*
-	 * @PostMapping("/message")
-	 * 
-	 * @ResponseStatus(HttpStatus.CREATED) public void sendMessage(@RequestBody
-	 * MyJsonObject model) { messageService.send(model); }
-	 */
 
 	@PostMapping
 	@CrossOrigin("*")
